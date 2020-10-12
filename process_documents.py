@@ -160,8 +160,9 @@ def main():
     data = []
     counter = 0
     for filepath in glob.iglob(os.path.join(INPUT_DIR, "*.rtf")):
-        if counter >= FILE_COUNT:
-            break
+        if FILE_COUNT is not None:
+            if counter >= FILE_COUNT:
+                break
         data.append(
             process_rtf_to_dataframe(
                 filepath,
