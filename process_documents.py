@@ -60,6 +60,14 @@ argparser.add_argument(
     default=r"(\d{1,2}):(\d{2})",
 )
 
+argparser.add_argument(
+    "--file_count",
+    help="number of files to read",
+    action="store",
+    type=int,
+    default=None,
+)
+
 # Execute the parse_args() method
 args = argparser.parse_args()
 
@@ -69,6 +77,7 @@ DELIMITER = args.delimiter
 DATE_PATTERN = args.date_pattern
 DOCUMENT_ID_PATTERN = args.document_id_pattern
 TIME_PATTERN = args.time_pattern
+FILE_COUNT = args.file_count
 
 
 if not os.path.isdir(INPUT_DIR):
@@ -149,7 +158,10 @@ def main():
     :return:
     """
     data = []
+    counter = 0
     for filepath in glob.iglob(os.path.join(INPUT_DIR, "*.rtf")):
+        if counter >= FILE_COUNT:
+            break
         data.append(
             process_rtf_to_dataframe(
                 filepath,
@@ -158,6 +170,7 @@ def main():
                 time_patt=TIME_PATTERN,
             )
         )
+        counter += 1
     result = pd.concat(data)
     outpath = os.path.join(
         OUTPUT_DIR,
