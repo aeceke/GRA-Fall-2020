@@ -104,8 +104,21 @@ def process_rtf_to_dataframe(fpath, docid_patt, date_patt, time_patt):
     :return: pandas DataFrame
     """
     # read the raw content of the .RTF file
-    with open(fpath) as f:
-        rtf = f.read()
+
+    with open(fpath, encoding="utf8") as f:
+        try:
+            rtf = f.read()
+        except ValueError as err:
+            print("Error ({fpath}): {err}".format(fpath=fpath, err=err))
+            raise
+        except:
+            print(
+                "Unexpected error ({fpath}): {err}".format(
+                    fpath=fpath, err=sys.exc_info()[0]
+                )
+            )
+            raise
+
     # strip formatting to get plain text
     text = rtf_to_text(rtf).strip()
     # get document ID corresponding to each article
