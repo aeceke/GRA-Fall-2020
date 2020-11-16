@@ -2,7 +2,7 @@
 
 ## Convert RTF files to text
 
-The process_documents() tool returns a tab-delimited table file with the document ID, date, time, and article text as 
+The process_documents.py tool returns a tab-delimited table file with the document ID, date, time, and article text as 
 columns. 
 
 It runs as a command line tool, so in the command line you just run the line below to do the conversion:
