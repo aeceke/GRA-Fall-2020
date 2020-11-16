@@ -7,7 +7,7 @@ columns.
 
 It runs as a command line tool, so in the command line you just run the line below to do the conversion:
 
-    python process_documents.py --input_dir "input\directory\path" --output_dir "output\directory\path"
+    python process_documents.py --input_dir "input/directory/path" --output_dir "output/directory/path"
 
 You will need to change 2 arguments, input_dir and output_dir:
 
